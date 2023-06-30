@@ -20,7 +20,7 @@ export default function Page() {
 
     const geolocationAPI = navigator.geolocation;
 
-    const getUserCoordinates = () => {
+    function getUserCoordinates() {
         if (!geolocationAPI) {
             console.log('Geolocation API is not available in your browser!')
         } else {
@@ -36,9 +36,7 @@ export default function Page() {
     }
 
 
-    if (geolocationAPI) {
-        getUserCoordinates();
-    }
+    
 
     if(!geoLocationInUse && !isLoading) {
         return <section>
@@ -48,6 +46,10 @@ export default function Page() {
 
     useEffect(() => {
         
+        if (geolocationAPI) {
+            getUserCoordinates();
+        }
+
         setIsLoading(true);
 
         console.log("page: lat: " + lat + " long: " + long);
