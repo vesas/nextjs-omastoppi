@@ -1,0 +1,15 @@
+
+TODO.txt
+
+node_modules
+
+# Next.js build output
+.next
+
+# dotenv environment variables file
+.env
+.env.test
+.env*.local
+
+
+
