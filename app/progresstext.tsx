@@ -49,10 +49,7 @@ function ProgressText() {
     }
 
     useEffect(() => {
-        setInterval(() => {
-            changeText();
-        }, 4000);
-        
+        setInterval(changeText, 4000);
     }, []);
 
     return (
