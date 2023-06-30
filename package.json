@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "@apollo/client": "^3.7.16",
+    "@mapcomponents/react-maplibre": "^0.1.84",
     "eslint-config-next": "^13.4.7",
     "graphql": "^16.7.1",
     "next": "^13.4.7",
+    "pigeon-maps": "^0.21.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

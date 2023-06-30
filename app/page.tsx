@@ -6,6 +6,8 @@ import { use, useEffect, useState } from 'react';
 import { stopsByRadius } from './stopsByRadius';
 
 import ProgressText from './progresstext';
+import TheMap from './map';
+
 
 export default function Page() {
 
@@ -75,6 +77,8 @@ export default function Page() {
 
     
     <ProgressText />
+
+    <TheMap />
     </div>
     )
     
