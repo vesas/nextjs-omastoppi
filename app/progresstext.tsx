@@ -5,7 +5,6 @@ const texts = [
     'pannu tulilla...',
     'brainstorm käynnissä...',
     'koodi kuumenee...',
-    'koodi kuumenee edelleen...',
     'kahvi valmistuu...',
     'ideat suodattuvat...',
     'bugit piileskelevät...', 
@@ -21,12 +20,10 @@ const texts = [
     'syntaksivirheitä etsitään...', 
     'dataa siirretään yläpilveen...', 
     'taistelu nollia ja ykkösiä vastaan...',
-    'koodi kuumenee edelleen...',
     'binääri lukee itseään...',
     'kahvi valmistuu...',
     'muistia lisätään...',
     'ideat suodattuvat...',
-    'pannu tulilla...',
     'datan jäsentäjä ottaa lomaa...',
     'lohkoketju katkeaa, paikataan...',
     'palvelin nukkuu, herätetään...',
@@ -38,6 +35,31 @@ const texts = [
     'ladataan matriisia...',
     'ideoidaan idean sisällä...',
     'jäädytetään koodin versio...',
+    "algoritmit laukkaavat...",
+    "tietokone hikoilee...",
+    "bitit lentävät...",
+    "bugit korjaantuvat...",
+    "muuttujat määrittyvät...",
+    "funktiot sulavat yhteen...",
+    "koodirivit täydentyvät...",
+    "taulukot laajenevat...",
+    "testit suoritetaan...",
+    "päivitykset ladataan...",
+    "backend yhdistyy frontendin kanssa...",
+    "dokumentaatio päivittyy...",
+    "moduulit integroituvat...",
+    "git-haara haarautuu...",
+    "ohjelmisto päivittyy...",
+    "kehitysympäristö optimoituu...",
+    "serverit käynnistyvät...",
+    "API vastaa kutsuihin...",
+    "CI/CD-pipeline virtaa...",
+    "tietokanta päivittyy...",
+    "yleisötestaus alkaa...",
+    "skriptit suoritetaan...",
+    "UI/UX parantuu...",
+    "proxyt ohjaavat...",
+    "debuggaus aloitetaan..."
 ];
 
 function ProgressText() {
@@ -53,7 +75,7 @@ function ProgressText() {
     }, []);
 
     return (
-        <div className='text-center text-m p-5 w-full'>{texts[textIndex]}</div>
+        <div className='text-center text-m p-1 w-full'>{texts[textIndex]}</div>
     )
 }
 

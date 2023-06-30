@@ -8,7 +8,6 @@ import { stopsByRadius } from './stopsByRadius';
 import ProgressText from './progresstext';
 import TheMap from './map';
 
-
 export default function Page() {
 
     const [lat, setLat] = useState(null);
@@ -17,7 +16,6 @@ export default function Page() {
     const [isLoading, setIsLoading] = useState(true);
     const [loadedData, setLoadedData] = useState("");
 
-    /*
     const [geoLocationInUse, setIsGeoLocationInUse] = useState(false);
 
     const geolocationAPI = navigator.geolocation;
@@ -52,12 +50,11 @@ export default function Page() {
         
         setIsLoading(true);
 
-        console.log("page: process.browser: " + process.browser);
         console.log("page: lat: " + lat + " long: " + long);
 
         stopsByRadius("" + lat, "" + long, 500).then((result: string) => {
+            console.log("result: " + JSON.stringify(result, undefined, 2));
             setLoadedData(result);
-            console.log("result34: " + result);
             setIsLoading(false);
         }, (error) => {
             console.log("error: " + error);
@@ -67,25 +64,19 @@ export default function Page() {
         
         
     }, [lat, long]);
-    */
-
     
 
     return (
     <div className='flex flex-col'>
-    <h1 className='text-center text-4xl p-5 w-full'><span className='px-2'>oma</span><span>stoppi</span></h1>
+    <h1 className='text-center text-4xl p-2 w-full bg-orange-500 text-neutral-50'><span className='px-2'>oma</span><span>stoppi</span></h1>
 
-    
     <ProgressText />
 
-    <TheMap />
+    
+    { !isLoading && <TheMap lat={lat} long={long} /> }
+    <div className='text-center'><span>{lat} {long}</span></div>
+    
     </div>
     )
     
-/*
-    <p className="text-slate-500">Lähialueen lähdöt kätevästi yhdessä paikassa</p>
-    <p>lat: {lat}</p>
-    <p>long: {long}</p>
-    <p>loadedData: {JSON.stringify(loadedData, undefined, 2)}</p>
-    */
 }
