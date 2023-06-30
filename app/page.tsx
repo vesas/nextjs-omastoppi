@@ -18,25 +18,21 @@ export default function Page() {
 
     const [geoLocationInUse, setIsGeoLocationInUse] = useState(false);
 
-    const geolocationAPI = navigator.geolocation;
-
-    function getUserCoordinates() {
-        if (!geolocationAPI) {
-            console.log('Geolocation API is not available in your browser!')
-        } else {
-            geolocationAPI.getCurrentPosition((position) => {
+    if (global.navigator && global.navigator.geolocation) {
+        global.navigator.geolocation.getCurrentPosition((position) => {
             const { coords } = position;
-            setLat(coords.latitude);
-            setLong(coords.longitude);
+
+            const latitude = coords.latitude;
+            const longitude = coords.longitude;
+            setLat(latitude);
+            setLong(longitude);
             setIsGeoLocationInUse(true);
-            }, (error) => {
+        }), () => {
             console.log('Something went wrong getting your position!')
-            });
         }
-    }
-
-
-    
+      } else {
+        console.log("Geolocation not supported");
+      }
 
     if(!geoLocationInUse && !isLoading) {
         return <section>
@@ -45,26 +41,23 @@ export default function Page() {
     }
 
     useEffect(() => {
-        
-        if (geolocationAPI) {
-            getUserCoordinates();
-        }
 
         setIsLoading(true);
 
         console.log("page: lat: " + lat + " long: " + long);
 
-        stopsByRadius("" + lat, "" + long, 500).then((result: string) => {
-            console.log("result: " + JSON.stringify(result, undefined, 2));
-            setLoadedData(result);
-            setIsLoading(false);
-        }, (error) => {
-            console.log("error: " + error);
-            setIsLoading(false);
-        });
+        if(lat && long) {
+            stopsByRadius(lat, long, 500).then((result: string) => {
+                console.log("result: " + JSON.stringify(result, undefined, 2));
+                setLoadedData(result);
+                setIsLoading(false);
+            }, (error) => {
+                console.log("error: " + error);
+                setIsLoading(false);
+            });
+        }
+        
 
-        
-        
     }, [lat, long]);
     
 
