@@ -42,18 +42,14 @@ export default function Page() {
 
     useEffect(() => {
 
-        setIsLoading(true);
-
         console.log("page: lat: " + lat + " long: " + long);
 
         if(lat && long) {
             stopsByRadius(lat, long, 500).then((result: string) => {
                 console.log("result: " + JSON.stringify(result, undefined, 2));
                 setLoadedData(result);
-                setIsLoading(false);
             }, (error) => {
                 console.log("error: " + error);
-                setIsLoading(false);
             });
         }
         
@@ -68,9 +64,12 @@ export default function Page() {
     <ProgressText />
 
     
-    { !isLoading && <TheMap lat={lat} long={long} /> }
+    { geoLocationInUse && <TheMap lat={lat} long={long} /> }
     <div className='text-center'><span>{lat} {long}</span></div>
     
+    <div>
+        {!isLoading && loadedData['stopsByRadius']['edges']}
+    </div>
     </div>
     )
     
