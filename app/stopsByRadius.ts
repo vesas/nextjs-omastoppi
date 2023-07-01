@@ -19,6 +19,15 @@ const GET_STOPS = gql`
           stop {
             gtfsId
             name
+            stoptimesWithoutPatterns {
+              realtimeDeparture
+              headsign
+              trip {
+                route {
+                  shortName
+                }
+              }
+            }
           }
           distance
         }
