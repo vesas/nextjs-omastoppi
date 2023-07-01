@@ -1,10 +1,12 @@
 "use server"
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { ApolloLink, ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+
 
 const client = new ApolloClient({
 
     uri: process.env.DIGITRANSIT_API_URL,
     cache: new InMemoryCache(),
+    credentials: 'include',
     headers: {
         "Content-Type": "application/json",
         "digitransit-subscription-key": process.env.DIGITRANSIT_API_KEY
