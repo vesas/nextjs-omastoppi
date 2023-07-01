@@ -38,9 +38,10 @@ const GET_STOPS = gql`
 
 export async function stopsByRadius(lat: string, lon: string, radius: number) : Promise<string> {
     
-    console.log("Hello world!");
-    console.log("component: process.browser: " + process.browser);
+    console.log("Calling API");
     console.log("lat: " + lat + " lon: " + lon + " radius: " + radius);
+    console.log("process.env.DIGITRANSIT_API_URL: " + process.env.DIGITRANSIT_API_URL);
+    console.log("process.env.DIGITRANSIT_API_KEY: " + process.env.DIGITRANSIT_API_KEY);
 
     const result = await client.query({
         query: GET_STOPS,
