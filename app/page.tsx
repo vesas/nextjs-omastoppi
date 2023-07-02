@@ -15,7 +15,6 @@ export default function Page() {
     const [long, setLong] = useState(null);
 
     const [isLoading, setIsLoading] = useState(true);
-    const [loadedData, setLoadedData] = useState("");
 
     const [geoLocationInUse, setIsGeoLocationInUse] = useState(false);
 
@@ -89,8 +88,6 @@ export default function Page() {
         if(lat && long) {
             setIsLoading(true);
             stopsByRadius(lat, long, 500).then((result: string) => {
-                // console.log("result: " + JSON.stringify(result, undefined, 2));
-                setLoadedData(result);
                 parseData(result);
                 setIsLoading(false);
             }, (error) => {
@@ -121,6 +118,12 @@ export default function Page() {
     <hr />
     <div className='text-center'><span>{lat} {long}</span></div>
     
+    <hr />
+
+    <div>
+        <p>You can add this web page as an icon to your phone's home screen by using the 'Add to home screen' functionality in your browser.</p>
+    </div>
+
     </div>
     )
     
