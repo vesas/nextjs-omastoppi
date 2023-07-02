@@ -30,11 +30,13 @@ export default function Page() {
             var stopid = stop.node.stop.gtfsId.replace("HSL:", "");
             var stopname = stop.node.stop.name;
             var zoneId = stop.node.stop.zoneId;
+            var distance = stop.node.distance;
             // console.log("stopid: " + stopid);
 
             var stopitem = { id: stopid,
                 name: stopname,
                 zoneId: zoneId,
+                distance: distance,
                 trips: [] };
 
             stop.node.stop.stoptimesWithoutPatterns.map((stoptime) => {
