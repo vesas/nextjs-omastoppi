@@ -1,7 +1,6 @@
 "use server"
 import { ApolloLink, ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
 
-
 const client = new ApolloClient({
 
     uri: process.env.DIGITRANSIT_API_URL,
@@ -40,11 +39,6 @@ const GET_STOPS = gql`
 `;
 
 export async function stopsByRadius(lat: string, lon: string, radius: number) : Promise<string> {
-    
-    console.log("Calling digitransit API");
-    console.log("lat: " + lat + " lon: " + lon + " radius: " + radius);
-    console.log("process.env.DIGITRANSIT_API_URL: " + process.env.DIGITRANSIT_API_URL);
-    console.log("process.env.DIGITRANSIT_API_KEY: " + process.env.DIGITRANSIT_API_KEY);
 
     const result = await client.query({
         query: GET_STOPS,
@@ -59,14 +53,6 @@ export async function stopsByRadius(lat: string, lon: string, radius: number) : 
     });
     
     return result.data;
-    /*.then((result) => { 
 
-        console.log("data: " + JSON.stringify(result.data, undefined, 2));
-        return result.data.stopsByRadius;
-        // console.log(result);
-    });
-    
-    return result;
-    */
 }
 

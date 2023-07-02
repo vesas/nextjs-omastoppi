@@ -6,10 +6,7 @@ function TheMap(props) {
 
     const [zoom, setZoom] = useState(16)
 
-    console.log("map: initial lat: " + props.initialLat + " initial long: " + props.initialLong + " typeof lat: " + typeof props.initialLat + " typeof long: " + typeof props.initialLong);
-
     function mapClicked({ event, latLng, pixel }) {
-        console.log("map clicked");
 
         props.mapClickedCallback({ event, latLng, pixel });
     }
@@ -19,5 +16,4 @@ function TheMap(props) {
     );
 }
 
-/* <Marker width={50} anchor={[50.879, 4.6997]} /> */
 export default TheMap;

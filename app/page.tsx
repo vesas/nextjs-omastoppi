@@ -21,7 +21,6 @@ export default function Page() {
     const [stops, setStops] = useState([]); // stops
 
     function parseData(data) {
-        // console.log("parseData: " + JSON.stringify(data, undefined, 2));
 
         var newStops = [];
 
@@ -30,7 +29,6 @@ export default function Page() {
             var stopname = stop.node.stop.name;
             var zoneId = stop.node.stop.zoneId;
             var distance = stop.node.distance;
-            // console.log("stopid: " + stopid);
 
             var stopitem = { id: stopid,
                 name: stopname,
@@ -44,21 +42,16 @@ export default function Page() {
                 var headSign = stoptime.headsign;
                 var realTimeDeparture = stoptime.realtimeDeparture;
 
-                // console.log("shortName: " + shortName + " headSign: " + headSign + " realTimeDeparture: " + realTimeDeparture);
-
                 stopitem.trips.push({ shortName: shortName, headSign: headSign, realTimeDeparture: realTimeDeparture });
             });
 
             newStops.push(stopitem);
         });
 
-        console.log("newStops: " + newStops);
         setStops(newStops);
     }
 
     function mapClickedCallback({ event, latLng, pixel }) {
-        console.log("Page.map clicked callback: lat: " + latLng[0] + " long: " + latLng[1]);
-
         setLat(latLng[0]);
         setLong(latLng[1]);
     }
@@ -82,8 +75,6 @@ export default function Page() {
     }, []);
 
     useEffect(() => {
-
-        console.log("page: lat: " + lat + " long: " + long);
 
         if(lat && long) {
             setIsLoading(true);
@@ -110,14 +101,12 @@ export default function Page() {
 
     <ProgressText />
 
-    
     { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} /> }
     
     { stops && <StopList stops={stops} /> }
 
     <hr />
     <div className='text-center'><span>{lat} {long}</span></div>
-    
     <hr />
 
     <div>
@@ -126,5 +115,4 @@ export default function Page() {
 
     </div>
     )
-    
 }

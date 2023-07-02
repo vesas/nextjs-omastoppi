@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     title: 'Omastoppi',
     description: 'Get bus stop information for HSL bus stops in Finland',
   }
-   
+
 export default function RootLayout({
 children,
 }: {
@@ -32,7 +32,7 @@ return (
       sizes="<generated>"
     />
     </head>
-    
+
     <body>{children}</body>
     </html>
 )
