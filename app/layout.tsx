@@ -15,6 +15,24 @@ children: React.ReactNode
 }) {
 return (
     <html lang="en">
+    <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="description" content={metadata.description} />
+        <link
+        rel="apple-touch-icon"
+        href="/apple-icon?<generated>"
+        type="image/<generated>"
+        sizes="<generated>"
+    />
+    <link
+      rel="icon"
+      href="/apple-icon.png?<generated>"
+      type="image/<generated>"
+      sizes="<generated>"
+    />
+    </head>
+    
     <body>{children}</body>
     </html>
 )

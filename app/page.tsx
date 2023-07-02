@@ -113,9 +113,11 @@ export default function Page() {
 
     
     { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} /> }
-    <div className='text-center'><span>{lat} {long}</span></div>
     
     { stops && <StopList stops={stops} /> }
+
+    <hr />
+    <div className='text-center'><span>{lat} {long}</span></div>
     
     </div>
     )
