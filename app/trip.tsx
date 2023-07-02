@@ -13,7 +13,7 @@ function Trip(props) {
     }
 
     return (
-        <div>{secondsToHm(props.trip.realTimeDeparture)} {props.trip.shortName} {props.trip.headSign}</div>
+        <div>{secondsToHm(props.trip.realTimeDeparture)} - {props.trip.shortName} - {props.trip.headSign}</div>
     )
 }
 

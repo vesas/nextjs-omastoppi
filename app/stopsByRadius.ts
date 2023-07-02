@@ -21,6 +21,7 @@ const GET_STOPS = gql`
           stop {
             gtfsId
             name
+            zoneId
             stoptimesWithoutPatterns {
               realtimeDeparture
               headsign

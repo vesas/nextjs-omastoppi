@@ -29,10 +29,12 @@ export default function Page() {
         data.stopsByRadius.edges.map((stop) => {
             var stopid = stop.node.stop.gtfsId.replace("HSL:", "");
             var stopname = stop.node.stop.name;
+            var zoneId = stop.node.stop.zoneId;
             // console.log("stopid: " + stopid);
 
             var stopitem = { id: stopid,
                 name: stopname,
+                zoneId: zoneId,
                 trips: [] };
 
             stop.node.stop.stoptimesWithoutPatterns.map((stoptime) => {
