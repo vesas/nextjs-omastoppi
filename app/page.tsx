@@ -36,18 +36,20 @@ export default function Page() {
                 distance: distance,
                 trips: [] };
 
-            stop.node.stop.stoptimesWithoutPatterns.map((stoptime) => {
+            stop.node.stop.stoptimesWithoutPatterns.map((stoptime, index) => {
 
                 var shortName = stoptime.trip.route.shortName;
                 var headSign = stoptime.headsign;
                 var realTimeDeparture = stoptime.realtimeDeparture;
+                var key = index;
 
-                stopitem.trips.push({ shortName: shortName, headSign: headSign, realTimeDeparture: realTimeDeparture });
+                stopitem.trips.push({ shortName: shortName, headSign: headSign, realTimeDeparture: realTimeDeparture, key: key });
             });
 
             newStops.push(stopitem);
         });
 
+        // console.log("newStops: " + JSON.stringify(newStops, undefined, 2));
         setStops(newStops);
     }
 
