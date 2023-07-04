@@ -30,7 +30,8 @@ export default function Page() {
             var zoneId = stop.node.stop.zoneId;
             var distance = stop.node.distance;
 
-            var stopitem = { id: stopid,
+            var stopitem = { id: "" + stopid + zoneId + distance,
+                stopid: stopid,
                 name: stopname,
                 zoneId: zoneId,
                 distance: distance,
@@ -88,6 +89,8 @@ export default function Page() {
         if(lat && long) {
             setIsLoading(true);
             stopsByRadius(lat, long, 500).then((result: string) => {
+
+                console.log("result: " + JSON.stringify(result, undefined, 2));
                 parseData(result);
                 setIsLoading(false);
             }, (error) => {
