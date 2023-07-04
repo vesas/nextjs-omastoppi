@@ -43,10 +43,17 @@ export default function Page() {
                 var realTimeDeparture = stoptime.realtimeDeparture;
                 var key = index;
 
-                stopitem.trips.push({ shortName: shortName, headSign: headSign, realTimeDeparture: realTimeDeparture, key: key });
+                // TODO: check why some trips have no headsign
+                if(headSign && headSign.length > 0) {
+                    stopitem.trips.push({ shortName: shortName, headSign: headSign, realTimeDeparture: realTimeDeparture, key: key });
+                }
             });
 
-            newStops.push(stopitem);
+            // Some special stops have no zoneId, lets not show them
+            if(zoneId && zoneId.length > 0) {
+                newStops.push(stopitem);
+            }
+            
         });
 
         // console.log("newStops: " + JSON.stringify(newStops, undefined, 2));
