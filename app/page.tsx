@@ -109,7 +109,11 @@ export default function Page() {
 
     return (
     <div className='flex flex-col'>
-    <h1 className='text-center text-4xl p-2 w-full bg-orange-500 text-neutral-50'><span className='px-2'>oma</span><span>stoppi</span></h1>
+        <div className='text-center bg-orange-500 text-neutral-50 p-1 w-full'>
+            <h1 className='text-4xl'><span className='px-2'>oma</span><span>stoppi</span></h1>
+            <h3 className='text-l'>napauta karttaa, näe lähimmät lähdöt</h3>
+        </div>
+    
 
     <ProgressText />
 
@@ -122,7 +126,7 @@ export default function Page() {
     <hr />
 
     <div>
-        <p>You can add this web page as an icon to your phone's home screen by using the 'Add to home screen' functionality in your browser.</p>
+        <p>Voit tallettaa tämän sivun puhelimeesi käyttämällä 'Add to home page' -toimintoa selaimessa.</p>
     </div>
 
     </div>
