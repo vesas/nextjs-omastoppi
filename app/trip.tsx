@@ -4,7 +4,7 @@ function Trip(props) {
 
     function secondsToHm(d) {
         d = Number(d);
-        if(d > 86400) { // if we go over 24 hours, we need to subtract 24 hours
+        if(d > 86400) { // for some reason some departure times are over 24 hours, so we subtract 24 hours
             d = d - 86400;
         }
         var h = Math.floor(d / 3600);
