@@ -4,6 +4,9 @@ function Trip(props) {
 
     function secondsToHm(d) {
         d = Number(d);
+        if(d > 86400) { // if we go over 24 hours, we need to subtract 24 hours
+            d = d - 86400;
+        }
         var h = Math.floor(d / 3600);
         var m = Math.floor(d % 3600 / 60);
     
@@ -12,8 +15,10 @@ function Trip(props) {
         return hDisplay + ":" + mDisplay; 
     }
 
+    const departure = secondsToHm(props.trip.realTimeDeparture);
+
     return (
-        <div>{secondsToHm(props.trip.realTimeDeparture)} - {props.trip.shortName} - {props.trip.headSign}</div>
+        <div><time>{secondsToHm(props.trip.realTimeDeparture)}</time> - {props.trip.shortName} - {props.trip.headSign}</div>
     )
 }
 
