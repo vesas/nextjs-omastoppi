@@ -111,7 +111,7 @@ export default function Page() {
     <div className='flex flex-col'>
         <div className='text-center bg-orange-500 text-neutral-50 p-1 w-full'>
             <h1 className='text-4xl'><span className='px-2'>oma</span><span>stoppi</span></h1>
-            <h3 className='text-l'>napauta karttaa, näe lähimmät lähdöt</h3>
+            <h3 className='text-l'>napauta karttaa, näe lähimmät lähdöt HSL alueella</h3>
         </div>
     
 
