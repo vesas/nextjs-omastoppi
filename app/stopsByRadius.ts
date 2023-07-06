@@ -20,6 +20,8 @@ const GET_STOPS = gql`
           stop {
             gtfsId
             name
+            lat
+            lon
             zoneId
             stoptimesWithoutPatterns {
               realtimeDeparture

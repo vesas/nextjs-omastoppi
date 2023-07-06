@@ -29,11 +29,15 @@ export default function Page() {
             var stopname = stop.node.stop.name;
             var zoneId = stop.node.stop.zoneId;
             var distance = stop.node.distance;
+            var lat = stop.node.stop.lat;
+            var lon = stop.node.stop.lon;
 
             var stopitem = { id: "" + stopid + zoneId + distance,
                 stopid: stopid,
                 name: stopname,
                 zoneId: zoneId,
+                lat: lat,
+                lon: lon,
                 distance: distance,
                 trips: [] };
 
@@ -117,7 +121,7 @@ export default function Page() {
 
         <ProgressText />
 
-        { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} /> }
+        { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} stops={stops} /> }
         
         { stops && <StopList stops={stops} /> }
 
@@ -128,7 +132,6 @@ export default function Page() {
         <div>
             <p>Voit tallettaa tämän sivun puhelimeesi käyttämällä 'Add to home page' -toimintoa selaimessa.</p>
         </div>
-
     </div>
     )
 }
