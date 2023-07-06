@@ -90,7 +90,7 @@ export default function Page() {
             setIsLoading(true);
             stopsByRadius(lat, long, 500).then((result: string) => {
 
-                console.log("result: " + JSON.stringify(result, undefined, 2));
+                // console.log("result: " + JSON.stringify(result, undefined, 2));
                 parseData(result);
                 setIsLoading(false);
             }, (error) => {
@@ -115,19 +115,19 @@ export default function Page() {
         </div>
     
 
-    <ProgressText />
+        <ProgressText />
 
-    { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} /> }
-    
-    { stops && <StopList stops={stops} /> }
+        { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} /> }
+        
+        { stops && <StopList stops={stops} /> }
 
-    <hr />
-    <div className='text-center'><span>{lat} {long}</span></div>
-    <hr />
+        <hr />
+        <div className='text-center'><span>{lat} {long}</span></div>
+        <hr />
 
-    <div>
-        <p>Voit tallettaa tämän sivun puhelimeesi käyttämällä 'Add to home page' -toimintoa selaimessa.</p>
-    </div>
+        <div>
+            <p>Voit tallettaa tämän sivun puhelimeesi käyttämällä 'Add to home page' -toimintoa selaimessa.</p>
+        </div>
 
     </div>
     )
