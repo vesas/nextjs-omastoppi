@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { Map, Marker, Overlay } from "pigeon-maps"
+import { Map, Marker, Overlay } from "pigeon-maps";
 
 import Tooltip from "./tooltip";
 
@@ -18,7 +18,16 @@ function TheMap(props) {
     }
 
     function makeTooltipText(stop) {
-        return stop.stopid + ":" + stop.name;
+
+        var text = "";
+
+        var lines = new Set();
+
+        stop.trips.map((trip) => {
+            lines.add(trip.shortName);
+        });
+
+        return stop.stopid + ":" + stop.name + " " + Array.from(lines).join(",");
     }
 
     const stopmarkers = [];

@@ -130,7 +130,7 @@ export default function Page() {
         <hr />
 
         <div>
-            <p>Voit tallettaa tämän sivun puhelimeesi käyttämällä 'Add to home page' -toimintoa selaimessa.</p>
+            <p>Voit tallettaa tämän sivun puhelimesi näytölle käyttämällä 'Add to home screen' -toimintoa selaimessa.</p>
         </div>
     </div>
     )
