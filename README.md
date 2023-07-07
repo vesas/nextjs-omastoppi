@@ -3,6 +3,10 @@ Simple app for mobile & desktop to show the next departures from HSL stops near 
 
 Stack: Next.js React, GraphQL, TailwindCSS, and Vercel for deployment
 
+Data is from HSL open data: https://www.hsl.fi/hsl/avoin-data
+
+
+
 
 
 
