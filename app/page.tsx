@@ -70,7 +70,7 @@ export default function Page() {
         setLong(latLng[1]);
     }
 
-    useEffect(() => {
+    function geoLocate() {
         if (global.navigator && global.navigator.geolocation) {
             global.navigator.geolocation.getCurrentPosition((position) => {
                 const { coords } = position;
@@ -86,6 +86,25 @@ export default function Page() {
           } else {
             console.log("Geolocation not supported");
           }
+    }
+
+    function geoLocateAndFetch() {
+        geoLocate();
+        if(lat && long) {
+            setIsLoading(true);
+            stopsByRadius(lat, long, 500).then((result: string) => {
+
+                // console.log("result: " + JSON.stringify(result, undefined, 2));
+                parseData(result);
+                setIsLoading(false);
+            }, (error) => {
+                console.log("error: " + error);
+            });
+        }
+    }
+
+    useEffect(() => {
+        geoLocate();
     }, []);
 
     useEffect(() => {
@@ -111,6 +130,10 @@ export default function Page() {
     </section>
     }
 
+    function mapBoundsChanged({ center, zoom, bounds, initial }) {
+        console.log("mapBoundsChanged: " + JSON.stringify({ center, zoom, bounds, initial }, undefined, 2));
+    }
+
     return (
     <div className='flex flex-col'>
         <div className='text-center bg-orange-500 text-neutral-50 p-1 w-full'>
@@ -121,9 +144,11 @@ export default function Page() {
 
         <ProgressText />
 
-        { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} stops={stops} /> }
+        { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} onBoundsChanged={mapBoundsChanged} stops={stops} /> }
         
         { stops && <StopList stops={stops} /> }
+
+        <button onClick={geoLocateAndFetch}>Paikanna uudelleen</button>
 
         <hr />
         <div className='text-center'><span>{lat} {long}</span></div>

@@ -49,7 +49,7 @@ function TheMap(props) {
     });
 
     return (
-    <Map height={380} defaultCenter={[props.initialLat, props.initialLong]} zoom={zoom} onClick={({ event, latLng, pixel }) => { mapClicked({ event, latLng, pixel }); }}>
+    <Map height={380} center={[props.initialLat, props.initialLong]} zoom={zoom} onClick={({ event, latLng, pixel }) => { mapClicked({ event, latLng, pixel }); }}>
         <Marker width={26} anchor={[props.initialLat, props.initialLong]} ></Marker>
 
         {stopmarkers}

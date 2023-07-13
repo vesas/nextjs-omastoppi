@@ -5,7 +5,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
     title: 'Omastoppi',
-    description: 'Get bus stop information for HSL bus stops in Finland',
+    description: 'Lähimpien pysäkkien lähdöt HSL alueella',
   }
 
 export default function RootLayout({
@@ -14,10 +14,10 @@ children,
 children: React.ReactNode
 }) {
 return (
-    <html lang="en">
+    <html lang="fi">
     <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={metadata.description} />
         <link
         rel="apple-touch-icon"
