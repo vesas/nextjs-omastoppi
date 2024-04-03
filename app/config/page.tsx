@@ -1,5 +1,12 @@
 import * as msTeams from '@microsoft/teams-js';
 
+
+export const getServerSideProps = (async () => {
+  // Fetch data from external API
+  // const res = await fetch('https://api.github.com/repos/vercel/next.js')
+  
+}) 
+
 export default async function ConfigurationPage() {
 
     msTeams.app.initialize();
@@ -19,4 +26,3 @@ export default async function ConfigurationPage() {
         <p>Configure your app here.</p>
     </div>
 }
-
