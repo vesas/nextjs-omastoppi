@@ -4,7 +4,7 @@ async function initializeTeams() {
   try {
     await msTeams.app.initialize();
     
-    msTeams.pages.config.setValidityState(true);
+    
 
     console.log("App.js: initializing client SDK initialized");
     msTeams.app.notifyAppLoaded();
@@ -21,9 +21,14 @@ export default async function ConfigurationPage() {
 
     initializeTeams();
 
+
+    var initialized = false;
+
     try {
       
-      
+
+      msTeams.pages.config.setValidityState(true);
+      initialized = true;
 
       /*
       msTeams.pages.config.registerOnSaveHandler(saveEvent => {
@@ -44,5 +49,6 @@ export default async function ConfigurationPage() {
     return <div>
         <h1>Configure your app</h1>
         <p>Configure your app here.</p>
+        {initialized && <p>App is initialized</p>}
     </div>
 }
