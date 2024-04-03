@@ -2,6 +2,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.16",
     "@mapcomponents/react-maplibre": "^0.1.84",
+    "@microsoft/teams-js": "^2.21.0",
     "eslint-config-next": "^13.4.7",
     "graphql": "^16.7.1",
     "next": "^13.4.7",
