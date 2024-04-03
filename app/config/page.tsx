@@ -3,6 +3,9 @@ import * as msTeams from '@microsoft/teams-js';
 async function initializeTeams() {
   try {
     await msTeams.app.initialize();
+    
+    msTeams.pages.config.setValidityState(true);
+
     console.log("App.js: initializing client SDK initialized");
     msTeams.app.notifyAppLoaded();
     msTeams.app.notifySuccess();
@@ -19,6 +22,10 @@ export default async function ConfigurationPage() {
     initializeTeams();
 
     try {
+      
+      
+
+      /*
       msTeams.pages.config.registerOnSaveHandler(saveEvent => {
         msTeams.pages.config.setConfig({
           contentUrl: window.location.origin,
@@ -27,7 +34,8 @@ export default async function ConfigurationPage() {
     
         saveEvent.notifySuccess();
       });
-      msTeams.pages.config.setValidityState(true);
+      */
+      
     }
     catch (error) {
     }
