@@ -1,12 +1,5 @@
 import * as msTeams from '@microsoft/teams-js';
 
-
-export const getServerSideProps = (async () => {
-  // Fetch data from external API
-  // const res = await fetch('https://api.github.com/repos/vercel/next.js')
-  
-}) 
-
 async function initializeTeams() {
   try {
     await msTeams.app.initialize();
