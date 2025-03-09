@@ -71,7 +71,8 @@ function ProgressText() {
     }
 
     useEffect(() => {
-        setInterval(changeText, 4000);
+        const interval = setInterval(changeText, 4000);
+        return () => clearInterval(interval);
     }, []);
 
     return (
