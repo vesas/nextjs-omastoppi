@@ -19,9 +19,7 @@ function TheMap(props) {
 
     function makeTooltipText(stop) {
 
-        var text = "";
-
-        var lines = new Set();
+        const lines = new Set();
 
         stop.trips.map((trip) => {
             lines.add(trip.shortName);
@@ -36,7 +34,7 @@ function TheMap(props) {
         const lat = parseFloat(stop.lat);
         const lon = parseFloat(stop.lon);
 
-        stopmarkers.push(<Overlay key={idx} anchor={[lat, lon]} offset={[12, 12]}>
+        stopmarkers.push(<Overlay key={stop.id} anchor={[lat, lon]} offset={[12, 12]}>
             <Tooltip text={makeTooltipText(stop)}>
             <span onClick={stopClicked}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">

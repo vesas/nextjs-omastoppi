@@ -1,7 +1,7 @@
 
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { stopsByRadius } from './stopsByRadius';
 
@@ -16,23 +16,23 @@ export default function Page() {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [geoLocationInUse, setIsGeoLocationInUse] = useState(false);
+    const [isGeoLocationInUse, setIsGeoLocationInUse] = useState(false);
 
     const [stops, setStops] = useState([]); // stops
 
     function parseData(data) {
 
-        var newStops = [];
+        const newStops = [];
 
         data.stopsByRadius.edges.map((stop) => {
-            var stopid = stop.node.stop.gtfsId.replace("HSL:", "");
-            var stopname = stop.node.stop.name;
-            var zoneId = stop.node.stop.zoneId;
-            var distance = stop.node.distance;
-            var lat = stop.node.stop.lat;
-            var lon = stop.node.stop.lon;
+            const stopid = stop.node.stop.gtfsId.replace("HSL:", "");
+            const stopname = stop.node.stop.name;
+            const zoneId = stop.node.stop.zoneId;
+            const distance = stop.node.distance;
+            const lat = stop.node.stop.lat;
+            const lon = stop.node.stop.lon;
 
-            var stopitem = { id: "" + stopid + zoneId + distance,
+            const stopitem = { id: "" + stopid + zoneId + distance,
                 stopid: stopid,
                 name: stopname,
                 zoneId: zoneId,
@@ -43,10 +43,10 @@ export default function Page() {
 
             stop.node.stop.stoptimesWithoutPatterns.map((stoptime, index) => {
 
-                var shortName = stoptime.trip.route.shortName;
-                var headSign = stoptime.headsign;
-                var realTimeDeparture = stoptime.realtimeDeparture;
-                var key = index;
+                const shortName = stoptime.trip.route.shortName;
+                const headSign = stoptime.headsign;
+                const realTimeDeparture = stoptime.realtimeDeparture;
+                const key = index;
 
                 // TODO: check why some trips have no headsign
                 if(headSign && headSign.length > 0) {
@@ -61,7 +61,6 @@ export default function Page() {
             
         });
 
-        // console.log("newStops: " + JSON.stringify(newStops, undefined, 2));
         setStops(newStops);
     }
 
@@ -71,21 +70,17 @@ export default function Page() {
     }
 
     function geoLocate() {
-        if (global.navigator && global.navigator.geolocation) {
-            global.navigator.geolocation.getCurrentPosition((position) => {
-                const { coords } = position;
-    
-                const latitude = coords.latitude;
-                const longitude = coords.longitude;
-                setLat(latitude);
-                setLong(longitude);
-                setIsGeoLocationInUse(true);
-            }), () => {
-                console.log('Something went wrong getting your position!')
-            }
-          } else {
-            console.log("Geolocation not supported");
-          }
+        global.navigator?.geolocation?.getCurrentPosition((position) => {
+            const { coords } = position;
+
+            const latitude = coords.latitude;
+            const longitude = coords.longitude;
+            setLat(latitude);
+            setLong(longitude);
+            setIsGeoLocationInUse(true);
+        }, () => {
+            console.log('Something went wrong getting your position!')
+        });
     }
 
     function geoLocateAndFetch() {
@@ -94,7 +89,6 @@ export default function Page() {
             setIsLoading(true);
             stopsByRadius(lat, long, 500).then((result: string) => {
 
-                // console.log("result: " + JSON.stringify(result, undefined, 2));
                 parseData(result);
                 setIsLoading(false);
             }, (error) => {
@@ -113,7 +107,6 @@ export default function Page() {
             setIsLoading(true);
             stopsByRadius(lat, long, 500).then((result: string) => {
 
-                // console.log("result: " + JSON.stringify(result, undefined, 2));
                 parseData(result);
                 setIsLoading(false);
             }, (error) => {
@@ -124,7 +117,7 @@ export default function Page() {
 
     }, [lat, long]);
 
-    if(!geoLocationInUse && !isLoading) {
+    if(!isGeoLocationInUse && !isLoading) {
         return <section>
         <p>It seems geolocation services are not enabled in your browser, please enable them if you want to to use this application.</p>
     </section>
