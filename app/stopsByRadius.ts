@@ -1,16 +1,17 @@
 "use server"
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink, gql } from '@apollo/client';
 
 const client = new ApolloClient({
-
-    uri: process.env.DIGITRANSIT_API_URL,
+    link: new HttpLink({
+        uri: process.env.DIGITRANSIT_API_URL,
+        credentials: 'include',
+        headers: {
+            "Content-Type": "application/json",
+            "digitransit-subscription-key": process.env.DIGITRANSIT_API_KEY
+        }
+    }),
     cache: new InMemoryCache(),
-    credentials: 'include',
-    headers: {
-        "Content-Type": "application/json",
-        "digitransit-subscription-key": process.env.DIGITRANSIT_API_KEY
-      }
-  });
+});
 
 const GET_STOPS = gql`
   query GetStopsByRadius($lat: Float!, $lon: Float!, $radius: Int!) {

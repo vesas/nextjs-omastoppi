@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { stopsByRadius } from './stopsByRadius';
 
 import ProgressText from './progresstext';
-import TheMap from './map';
+import dynamic from 'next/dynamic';
+const TheMap = dynamic(() => import('./map'), { ssr: false });
 import StopList from './stoplist';
 
 export default function Page() {
@@ -75,12 +76,14 @@ export default function Page() {
 
             const latitude = coords.latitude;
             const longitude = coords.longitude;
+            localStorage.setItem('lastLat', String(latitude));
+            localStorage.setItem('lastLong', String(longitude));
             setLat(latitude);
             setLong(longitude);
             setIsGeoLocationInUse(true);
         }, () => {
             console.log('Something went wrong getting your position!')
-        });
+        }, { maximumAge: 30000 });
     }
 
     function geoLocateAndFetch() {
@@ -98,6 +101,12 @@ export default function Page() {
     }
 
     useEffect(() => {
+        const cachedLat = localStorage.getItem('lastLat');
+        const cachedLong = localStorage.getItem('lastLong');
+        if (cachedLat && cachedLong) {
+            setLat(parseFloat(cachedLat));
+            setLong(parseFloat(cachedLong));
+        }
         geoLocate();
     }, []);
 
