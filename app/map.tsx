@@ -3,14 +3,29 @@ import { useState } from "react";
 import { Map, Marker, Overlay } from "pigeon-maps";
 
 import Tooltip from "./tooltip";
+import { buildVehicleOverlays } from "./vehicleLayer";
+
+interface Bounds {
+    ne: [number, number];
+    sw: [number, number];
+}
 
 function TheMap(props) {
 
     const [zoom, setZoom] = useState(16)
+    const [bounds, setBounds] = useState<Bounds | null>(null);
 
     function mapClicked({ event, latLng, pixel }) {
 
         props.mapClickedCallback({ event, latLng, pixel });
+    }
+
+    function boundsChanged({ center, zoom: nextZoom, bounds: nextBounds, initial }) {
+        setZoom(nextZoom);
+        setBounds(nextBounds);
+        if (props.onBoundsChanged) {
+            props.onBoundsChanged({ center, zoom: nextZoom, bounds: nextBounds, initial });
+        }
     }
 
     function stopClicked() {
@@ -47,13 +62,21 @@ function TheMap(props) {
     });
 
     return (
-    <Map height={380} center={[props.initialLat, props.initialLong]} zoom={zoom} onClick={({ event, latLng, pixel }) => { mapClicked({ event, latLng, pixel }); }}>
+    <Map
+        height={380}
+        center={[props.initialLat, props.initialLong]}
+        zoom={zoom}
+        onClick={({ event, latLng, pixel }) => { mapClicked({ event, latLng, pixel }); }}
+        onBoundsChanged={boundsChanged}
+    >
         <Marker width={26} anchor={[props.initialLat, props.initialLong]} ></Marker>
 
         {stopmarkers}
-        
+
+        {buildVehicleOverlays(props.vehicles ?? [], bounds, zoom)}
+
     </Map>
-    
+
     );
 }
 

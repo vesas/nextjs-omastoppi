@@ -9,6 +9,7 @@ import ProgressText from './progresstext';
 import dynamic from 'next/dynamic';
 const TheMap = dynamic(() => import('./map'), { ssr: false });
 import StopList from './stoplist';
+import { useVehiclePositions } from './hooks/useVehiclePositions';
 
 export default function Page() {
 
@@ -126,14 +127,12 @@ export default function Page() {
 
     }, [lat, long]);
 
+    const { vehicles } = useVehiclePositions(lat, long, !!lat && !!long);
+
     if(!isGeoLocationInUse && !isLoading) {
         return <section>
         <p>It seems geolocation services are not enabled in your browser, please enable them if you want to to use this application.</p>
     </section>
-    }
-
-    function mapBoundsChanged({ center, zoom, bounds, initial }) {
-        console.log("mapBoundsChanged: " + JSON.stringify({ center, zoom, bounds, initial }, undefined, 2));
     }
 
     return (
@@ -146,7 +145,7 @@ export default function Page() {
 
         <ProgressText />
 
-        { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} onBoundsChanged={mapBoundsChanged} stops={stops} /> }
+        { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} stops={stops} vehicles={vehicles} /> }
         
         { stops && <StopList stops={stops} /> }
 
