@@ -7,5 +7,4 @@ Data is from HSL open data: https://www.hsl.fi/hsl/avoin-data
 
 Screenshot on mobile device:
 
-![image](https://github.com/vesas/nextjs-omastop/assets/42914624/70e3d968-580a-45b7-bd79-45577f71e61f)
-
+<img width="816" height="1600" alt="ss-2026-04-30-081409" src="https://github.com/user-attachments/assets/fa652f18-8096-4963-955d-a2d89b229fbb" />
