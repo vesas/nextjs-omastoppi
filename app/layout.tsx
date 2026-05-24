@@ -29,7 +29,27 @@ children,
 }) {
 return (
     <html lang="fi">
-    <body>{children}</body>
+    <body>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'WebApplication',
+                name: 'Omastoppi',
+                url: 'https://omastoppi.fi',
+                description: 'Lähimpien pysäkkien lähdöt HSL alueella',
+                applicationCategory: 'TravelApplication',
+                operatingSystem: 'All',
+                inLanguage: 'fi',
+                offers: {
+                    '@type': 'Offer',
+                    price: '0',
+                    priceCurrency: 'EUR',
+                },
+            }) }}
+        />
+        {children}
+    </body>
     </html>
 )
 }
