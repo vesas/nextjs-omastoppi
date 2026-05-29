@@ -18,9 +18,15 @@ export default function Page() {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [isGeoLocationInUse, setIsGeoLocationInUse] = useState(false);
+    // null = no error; 'denied' = permission refused; 'unavailable' = position
+    // could not be determined or the browser has no geolocation API.
+    const [geoError, setGeoError] = useState(null);
 
     const [stops, setStops] = useState([]); // stops
+
+    // Drives the live countdown: a periodic re-render so each Trip recomputes
+    // its "X min" from the current time without refetching stop data.
+    const [, setTick] = useState(0);
 
     function parseData(data) {
 
@@ -72,18 +78,28 @@ export default function Page() {
     }
 
     function geoLocate() {
-        global.navigator?.geolocation?.getCurrentPosition((position) => {
+        setIsLoading(true);
+        setGeoError(null);
+        const geo = global.navigator?.geolocation;
+        if (!geo) {
+            setGeoError('unavailable');
+            setIsLoading(false);
+            return;
+        }
+        geo.getCurrentPosition((position) => {
             const { coords } = position;
 
             const latitude = coords.latitude;
             const longitude = coords.longitude;
             localStorage.setItem('lastLat', String(latitude));
             localStorage.setItem('lastLong', String(longitude));
+            setGeoError(null);
             setLat(latitude);
             setLong(longitude);
-            setIsGeoLocationInUse(true);
-        }, () => {
-            console.log('Something went wrong getting your position!')
+        }, (error) => {
+            // code 1 === PERMISSION_DENIED
+            setGeoError(error && error.code === 1 ? 'denied' : 'unavailable');
+            setIsLoading(false);
         }, { maximumAge: 30000 });
     }
 
@@ -127,12 +143,29 @@ export default function Page() {
 
     }, [lat, long]);
 
+    useEffect(() => {
+        const interval = setInterval(() => setTick((t) => t + 1), 30000);
+        return () => clearInterval(interval);
+    }, []);
+
     const { vehicles } = useVehiclePositions(lat, long, !!lat && !!long);
 
-    if(!isGeoLocationInUse && !isLoading) {
-        return <section>
-        <p>It seems geolocation services are not enabled in your browser, please enable them if you want to to use this application.</p>
-    </section>
+    if(geoError && !lat) {
+        return (
+            <section className='text-center p-6 max-w-md mx-auto'>
+                <h1 className='text-2xl font-semibold mb-2'>Sijaintia ei saatu</h1>
+                <p className='mb-4 text-neutral-700'>
+                    {geoError === 'denied'
+                        ? 'Salli paikannus selaimen asetuksista nähdäksesi lähimmät pysäkit.'
+                        : 'Sijaintiasi ei juuri nyt voitu määrittää. Tarkista paikannus ja yhteys, ja yritä uudelleen.'}
+                </p>
+                <button
+                    onClick={geoLocateAndFetch}
+                    className='bg-orange-500 text-neutral-50 px-4 py-2 rounded'>
+                    Yritä uudelleen
+                </button>
+            </section>
+        );
     }
 
     return (
@@ -142,12 +175,14 @@ export default function Page() {
             <h3 className='text-l'>Lähimmät lähdöt HSL alueella</h3>
         </div>
     
-
-        <ProgressText />
-
         { lat && <TheMap initialLat={lat} initialLong={long} mapClickedCallback={mapClickedCallback} stops={stops} vehicles={vehicles} /> }
         
-        { stops && <StopList stops={stops} /> }
+        { isLoading
+            ? <ProgressText />
+            : stops.length > 0
+                ? <StopList stops={stops} />
+                : <p className='text-center p-4 text-neutral-600'>Ei pysäkkejä 500 metrin säteellä.</p>
+        }
 
         <button onClick={geoLocateAndFetch}>Paikanna uudelleen</button>
 
